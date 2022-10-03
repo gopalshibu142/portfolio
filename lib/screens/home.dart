@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:flutter_animated_theme/animated_theme_app.dart';
+import 'package:flutter_animated_theme/animation_type.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -25,15 +28,19 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return AnimatedThemeApp(
       debugShowCheckedModeBanner: false,
+      animationType: AnimationType.CIRCULAR_ANIMATED_THEME,
+      animationDuration: Duration(milliseconds: 200),
       theme: ThemeData(
+        textTheme: const TextTheme(),
         colorScheme: const ColorScheme.light(
-          primary: Color(0x117FBCD2),
+          primary: Color(0x447900ee),
         ),
         canvasColor: Color(0xffE1FFEE),
       ),
       darkTheme: ThemeData(
+          iconTheme: const IconThemeData(color: Colors.white54),
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: Colors.white,
               ),
@@ -56,12 +63,16 @@ class _HomeState extends State<Home> {
                 ),
                 actions: [
                   IconButton(
-                      onPressed: () {
-                        setState(() {
-                          thememod == ThemeMode.light
-                              ? thememod = ThemeMode.dark
-                              : thememod = ThemeMode.light;
-                        });
+                      onPressed: () async {
+                        try {
+                          setState(() {
+                            thememod == ThemeMode.light
+                                ? thememod = ThemeMode.dark
+                                : thememod = ThemeMode.light;
+                          });
+                        } catch (e) {
+                          print("error");
+                        }
                       },
                       icon: thememod == ThemeMode.light
                           ? Icon(Icons.light_mode)
@@ -84,7 +95,7 @@ class _HomeState extends State<Home> {
                       child: Image.asset('assets/profile.jpg'),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 1,
                     ),
                     Container(
                       height: 100,
@@ -92,14 +103,14 @@ class _HomeState extends State<Home> {
                         children: [
                           Text("I'm"),
                           const SizedBox(
-                            height: 15,
+                            height: 10,
                           ),
                           Text(
                             "Gopal Shibu",
-                            style: TextStyle(fontSize: 20),
+                            style: GoogleFonts.roboto(fontSize: 28),
                           ),
                           const SizedBox(
-                            height: 15,
+                            height: 8,
                           ),
                           AnimatedTextKit(
                               isRepeatingAnimation: true,
@@ -112,39 +123,67 @@ class _HomeState extends State<Home> {
                               ])
                         ],
                       ),
-                    ),SizedBox(height: 10,),
-                    Row(mainAxisAlignment: MainAxisAlignment.center,
-                      children: [IconButton(onPressed: () async{
-                        
-                        var url = 'https://instagram.com/therealgopal_';
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () async {
+                              var url = 'https://instagram.com/therealgopal_';
 
-                         
-                      await launchUrl(
-                        Uri.parse(url),
-                        mode: LaunchMode.externalApplication,
-                      );
-                      }, icon: FaIcon(FontAwesomeIcons.instagram,)),
-                      IconButton(onPressed: () async{
-                        var url = 'https://github.com/gopalshibu142';
+                              await launchUrl(
+                                Uri.parse(url),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.instagram,
+                            )),
+                        IconButton(
+                            onPressed: () async {
+                              var url = 'https://github.com/gopalshibu142';
 
-                         
-                      await launchUrl(
-                        Uri.parse(url),
-                        mode: LaunchMode.externalApplication,
-                      );
-                    
-                      }, icon: FaIcon(FontAwesomeIcons.github,)),
-                      IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.linkedin,)),
-                      IconButton(onPressed: () async{
-                        var url = 'https://wa.me/7592806009';
+                              await launchUrl(
+                                Uri.parse(url),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.github,
+                            )),
+                        IconButton(
+                            onPressed: () {},
+                            icon: FaIcon(
+                              FontAwesomeIcons.linkedin,
+                            )),
+                        IconButton(
+                            onPressed: () async {
+                              var url = 'https://wa.me/7592806009';
 
-                         
-                      await launchUrl(
-                        Uri.parse(url),
-                        mode: LaunchMode.externalApplication,
-                      );
-                      }, icon: FaIcon(FontAwesomeIcons.whatsapp,)),
-                      IconButton(onPressed: () {}, icon: FaIcon(FontAwesomeIcons.facebook,))],
+                              await launchUrl(
+                                Uri.parse(url),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.whatsapp,
+                            )),
+                        IconButton(
+                            onPressed: () async {
+                              var url = 'mailto:gopalshibu142@gmail.com';
+
+                              await launchUrl(
+                                Uri.parse(url),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.envelope,
+                            ))
+                      ],
                     )
                   ],
                 ),
