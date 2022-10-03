@@ -73,6 +73,7 @@ class _HomeState extends State<Home> {
                         } catch (e) {
                           print("error");
                         }
+                        throw NullThrownError;
                       },
                       icon: thememod == ThemeMode.light
                           ? Icon(Icons.light_mode)
@@ -155,7 +156,14 @@ class _HomeState extends State<Home> {
                               FontAwesomeIcons.github,
                             )),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () async{
+                               var url = 'https://www.linkedin.com/in/gopal-shibu-b83232205/';
+
+                              await launchUrl(
+                                Uri.parse(url),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
                             icon: FaIcon(
                               FontAwesomeIcons.linkedin,
                             )),
