@@ -43,6 +43,9 @@ dependencies:
   flutter_animated_theme: ^1.0.0
   easy_splash_screen: ^1.0.4
   flutter_launcher_icons: ^0.10.0
+  expandable: ^5.0.1
+  scroll_snap_list: ^0.9.1
+  horizontal_card_pager: ^1.1.1
 
 
 dev_dependencies:
