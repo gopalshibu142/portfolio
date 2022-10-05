@@ -101,14 +101,23 @@ class _HomeState extends State<Home> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.all(30.0),
-                    padding: const EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 5),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    width: 250,
-                    child: Image.asset('assets/profile.jpg'),
+                  Card(
+                    color: Colors.transparent,
+                    borderOnForeground: true,
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    
+                    elevation: 5,
+                    
+                    child: Container(
+                      
+                      padding: const EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 5),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      width: 250,
+                      child: Image.asset('assets/profile.jpg',fit: BoxFit.cover,),
+                    ),
                   ),
                   const SizedBox(
                     height: 1,
@@ -222,19 +231,21 @@ class _HomeState extends State<Home> {
                   Stack(
                     children: [
                       Center(
-                        child: Container(
-                            margin: const EdgeInsets.all(30.0),
-                    
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue.shade200, width: 5),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                        child: Card(
+                          elevation: 5,
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                image: DecorationImage(
-                                    image: imagelist[indeximage],fit: BoxFit.cover)),
-                            height: 300,
-                            width: 230,
+                              
+                                            decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue.shade200, width: 3),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  image: DecorationImage(
+                                      image: imagelist[indeximage],fit: BoxFit.cover)),
+                              height: 300,
+                              width: 230,
+                            ),
                           ),
                         ),
                       ),
@@ -244,6 +255,7 @@ class _HomeState extends State<Home> {
                         width: 350,
                         child: HorizontalCardPager(
                           initialPage: 3,
+                          
                           onPageChanged: (page) {
                             setState(() {
                               indeximage =(page%3).toInt();
@@ -366,9 +378,11 @@ class _HomeState extends State<Home> {
   ImageCarditem projects(Color clr, int i) {
     return ImageCarditem(
       image: Container(
+        
         height: 200,
         width: 100,
         decoration: BoxDecoration(
+          border: Border.all(width: 2,color: Colors.grey.shade300),
             color: clr,
             image: DecorationImage(image: imagelist[i], fit: BoxFit.cover)),
       ),
